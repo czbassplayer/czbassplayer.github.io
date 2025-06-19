@@ -1,1 +1,272 @@
-<h1>czbassplayer!!!</h1>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>炸果子的 - 作品集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* 作品网格 */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 180px; /* 原来是300px，缩小到60% */
+            gap: 0;
+            width: 60%; /* 缩小到原来的60% */
+            max-width: 720px; /* 原来是1200px，缩小到60% */
+            margin: 0 auto;
+            place-content: center;
+        }
+        
+        /* 添加这个新样式用于合并格子 */
+        .span-two {
+            grid-column: span 2;
+        }
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        /* 悬停文字样式 */
+        .hover-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+            font-size: 30px;
+            letter-spacing: 0.1em;
+            z-index: 10;
+            text-decoration: none;
+        }
+        
+        
+        .portfolio-item:hover .hover-text {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 特殊样式 */
+        .black-bg {
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 删除或修改这个限制图片大小的样式 */
+        /* .black-bg img {
+            max-width: 48px; 
+        } */
+        
+        .red-bg {
+            background-color: #f44336;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .red-bg img {
+            /* 移除或修改此行，让图片能够自适应其容器 */
+            /* max-width: 48px; */
+            width: 80px; /* 确保图片宽度充满容器 */
+            height: 80px; /* 确保图片高度充满容器 */
+            object-fit: contain; /* 确保图片在不被裁剪的情况下适应容器 */
+        }
+        
+        .pink-bg {
+            background-color: #f8a9a9;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 150px; /* 原来是250px，缩小到60% */
+                width: 80%; /* 在中等屏幕上稍微放大一点 */
+            }
+            .hover-text {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 120px; /* 原来是200px，缩小到60% */
+                width: 90%; /* 在小屏幕上进一步放大 */
+            }
+            .hover-text {
+                font-size: 16px;
+            }
+        }
+        /* 添加一个新的样式类，用于禁用悬停效果 */
+        .no-hover-effect .hover-text {
+            display: none;
+        }
+
+        .no-hover-effect:hover img {
+            transform: none;
+        }
+                /* 社交媒体图标网格 */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            width: 100%;
+            height: 100%;
+            gap: 10px;
+            padding: 15px;
+            background-color: rgb(243, 243, 243);
+            place-content: center; /* 新增此行，用于将网格内容居中 */
+        }
+
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .social-icon img {
+            width: 80%; /* 保持图片宽度为父容器的80% */
+            height: 80%; /* 保持图片高度为父容器的80% */
+            object-fit: contain;
+            display: block; /* 确保图片是块级元素，避免额外空间 */
+            max-width: 100%; /* 确保图片不会超出其父容器 */
+            max-height: 100%; /* 确保图片不会超出其父容器 */
+        }
+        
+        /* 如果您希望链接本身不影响布局，可以为a标签添加样式 */
+        .social-icon a {
+            display: flex; /* 让链接也成为flex容器，以便居中图片 */
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 为每个图标设置不同的背景色 
+        .xiaohongshu {
+            background-color: #e40d2a;
+        }
+        
+
+        .douban {
+            background-color: #00b51d;
+        }
+
+        .bilibili {
+            background-color: #fb7299;
+        }
+
+        .weibo {
+            background-color: #ff8200;
+        }
+        */
+    </style>
+</head>
+<body>
+    <section class="portfolio-grid">
+        <!-- 第一行 -->
+        <div class="portfolio-item black-bg span-two">
+            <img src="img/sheet.png" alt="Logo">
+            <a href="music/mysongbook.html" target="_blank" class="hover-text a">音乐</a>
+        </div>
+        <!-- 删除第二个格子 -->
+        <div class="portfolio-item">
+            <img src="img/baozi.png?text=菜谱" alt="菜谱">
+            <div class="hover-text">菜谱</div>
+        </div>
+        
+        <!-- 第二行 -->
+        <div class="portfolio-item">
+            <img src="img/Band.gif" alt="band">
+            <div class="hover-text">一曲成团</div>
+        </div>
+        <div class="portfolio-item red-bg">
+            <img src="img/mind.svg" alt="mind">
+            <!-- 可以选择完全移除hover-text元素 -->
+            <!-- <div class="hover-text">菜谱</div> -->
+        </div>
+        <div class="portfolio-item">
+            <img src="img/piant.png" alt="画">
+            <div class="hover-text">画</div>
+        </div>
+        
+        <!-- 第三行 -->
+        <div class="portfolio-item no-hover-effect">
+            <div class="social-grid">
+                <div class="social-icon xiaohongshu">
+                    <a href="https://www.xiaohongshu.com/user/profile/6130d5ce000000000201c9c5" target="_blank">
+                        <img src="img/xiaohongshu.svg" alt="小红书">
+                    </a>
+                </div>
+                <div class="social-icon douban">
+                    <a href="https://www.douban.com/people/czbassplayer/" target="_blank">
+                        <img src="img/douban.svg" alt="豆瓣">
+                    </a>
+                </div>
+                <div class="social-icon bilibili">
+                    <a href="https://space.bilibili.com/18006994" target="_blank">
+                        <img src="img/bilibili.svg" alt="Bilibili">
+                    </a>
+                </div>
+                <div class="social-icon weibo">
+                    <!--img src="#" alt="微博"-->
+                </div>
+            </div>
+            <!-- div class="hover-text">社交媒体</div -->
+        </div>
+        <div class="portfolio-item pink-bg">
+            <img src="img/blog.png" alt="blog">
+            <a href="blog/blog.html" target="_blank" class="hover-text a">博客</a>
+        </div>
+        <div class="portfolio-item black-bg">
+            <img src="img/indiegame.gif" alt="独立游戏">
+            <a href="indiegame/godot2d.html" target="_blank" class="hover-text a">独立游戏</a>
+        </div>
+    </section>
+</body>
+</html>
+
+
+
